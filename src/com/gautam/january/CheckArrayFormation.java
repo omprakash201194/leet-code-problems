@@ -60,7 +60,12 @@ public class CheckArrayFormation {
     }
     public static boolean canFormArray(int[] arr, int[][] pieces) {
 
-        List<Integer> resultantArr = getList(arr);
+        /*int [] mark = new int[arr.length];
+        int mainIndex = 0;
+        for (int [] piece : pieces) {
+            
+        }*/
+        /*List<Integer> resultantArr = getList(arr);
         for (int [] piece : pieces) {
             List<Integer> pieceArr = getList(piece);
             if (resultantArr.contains(pieceArr.get(0))) {
@@ -74,12 +79,8 @@ public class CheckArrayFormation {
                 return false;
             }
         }
+        return true;*/
         return true;
-
-    }
-
-    private static List<Integer> getList(int [] arr) {
-        return Arrays.stream(arr).boxed().collect(Collectors.toList());
     }
 
 }
