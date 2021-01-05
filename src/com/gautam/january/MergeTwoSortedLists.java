@@ -54,60 +54,22 @@ public class MergeTwoSortedLists {
     }
 
     public static ListNode mergeTwoLists(ListNode l1, ListNode l2) {
-        if (l1 == null && l2 == null) {
-            return null;
+        ListNode finalNode = new ListNode(-1), currentIterator = finalNode;
+        while(l1 != null && l2 != null) {
+            if(l1.val <= l2.val) {
+                currentIterator.next = l1;
+                l1 = l1.next;
+            } else {
+                currentIterator.next = l2;
+                l2 = l2.next;
+            }
+            currentIterator = currentIterator.next;
         }
-        ListNode sortedList = new ListNode();
-        ListNode finalList = sortedList;
-        ListNode temp1Iterator = l1;
-        ListNode temp2Iterator = l2;
-        while (temp1Iterator != null || temp2Iterator!= null) {
-            if (temp2Iterator == null) {
-                // Add remaining 1nd list nodes
-                sortedList.val = temp1Iterator.val;
-                sortedList.next = temp1Iterator.next;
-                temp1Iterator = null;
-            }
-            if (temp1Iterator != null && temp2Iterator != null && temp1Iterator.val < temp2Iterator.val) {
-                sortedList.val = temp1Iterator.val;
-                temp1Iterator = temp1Iterator.next;
 
-                if (temp1Iterator != null || temp2Iterator != null) {
-                    sortedList.next = new ListNode();
-                    sortedList = sortedList.next;
-                }
-            }
-            if (temp1Iterator != null && temp2Iterator!= null && temp1Iterator.val == temp2Iterator.val) {
-                sortedList.val = temp1Iterator.val;
+        if(l1 != null) currentIterator.next = l1;
+        if(l2 != null) currentIterator.next = l2;
 
-                sortedList.next = new ListNode(temp2Iterator.val);
-                sortedList = sortedList.next;
-
-                temp1Iterator = temp1Iterator.next;
-                temp2Iterator = temp2Iterator.next;
-
-                if (temp1Iterator != null || temp2Iterator != null) {
-                    sortedList.next = new ListNode();
-                    sortedList = sortedList.next;
-                }
-            }
-            if (temp1Iterator != null && temp2Iterator!= null && temp1Iterator.val > temp2Iterator.val){
-                sortedList.val = temp2Iterator.val;
-                temp2Iterator = temp2Iterator.next;
-
-                if (temp2Iterator != null || temp1Iterator != null) {
-                    sortedList.next = new ListNode();
-                    sortedList = sortedList.next;
-                }
-            }
-            if (temp1Iterator == null && temp2Iterator != null) {
-                // Add remaining 2nd list nodes
-                sortedList.val = temp2Iterator.val;
-                sortedList.next = temp2Iterator.next;
-                temp2Iterator = null;
-            }
-        }
-        return finalList;
+        return finalNode.next;
     }
 }
 
